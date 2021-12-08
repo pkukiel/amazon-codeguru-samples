@@ -149,8 +149,13 @@ public class Main {
             String decStr = new String(org.apache.commons.codec.binary.Base64.decodeBase64(
                 org.apache.commons.codec.binary.Base64.encodeBase64(fileName.getBytes())));
             java.io.FileOutputStream fileOutputStream = new java.io.FileOutputStream(decStr);
-            java.io.FileDescriptor fd = fileOutputStream.getFD();
-            System.out.println(fd.toString());
+            try {
+                java.io.FileDescriptor fd = fileOutputStream.getFD();
+                System.out.println(fd.toString());
+            }
+            finally {
+                fileOutputStream.close();
+            }
         }
     }
 
